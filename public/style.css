@@ -74,6 +74,7 @@ body::before {
   display: flex;
   gap: 16px;
   align-items: center;
+  margin-left: auto;
 }
 
 .header-center {
