@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>McDonald's Points - Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-center">
+      <div class="logo">MangePasCher</div>
+    </div>
+    <div class="header-right">
+      <span class="secure-text">Paiement sécurisé</span>
+      <div class="cart-container">
+        <svg class="cart-icon" id="cartToggle" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <div id="cartBadge" class="cart-badge" style="display: none;">0</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Mon Panier</h2>
+      <button class="cart-close" id="cartClose">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">0.00 €</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">Passer la commande</button>
+    </div>
+  </div>
+
+  <div class="checkout-modal" id="checkoutModal" aria-hidden="true">
+    <div class="checkout-modal__backdrop" id="checkoutBackdrop"></div>
+    <div class="checkout-modal__panel" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+      <div class="checkout-modal__header">
+        <div>
+          <div class="checkout-modal__title" id="checkoutModalTitle">Finaliser la commande</div>
+          <div class="checkout-modal__subtitle">Choisissez votre moyen de paiement</div>
+        </div>
+        <button class="cart-close" id="checkoutModalClose" aria-label="Fermer la fenêtre de paiement">&times;</button>
+      </div>
+
+      <div class="checkout-modal__body">
+        <div class="checkout-methods" id="checkoutMethods">
+          <button class="checkout-method active" data-method="apple_pay">
+            <div class="checkout-method__top">
+              <span class="checkout-method__name">Apple Pay</span>
+              <span class="checkout-method__tag">Rapide</span>
+            </div>
+            <div class="checkout-method__desc">Paiement instantané sur iPhone, iPad ou Mac.</div>
+          </button>
+
+          <button class="checkout-method" data-method="card">
+            <div class="checkout-method__top">
+              <span class="checkout-method__name">Carte bancaire</span>
+              <span class="checkout-method__tag">Rapide</span>
+            </div>
+            <div class="checkout-method__desc">Visa, Mastercard et autres cartes supportées.</div>
+          </button>
+
+          <button class="checkout-method" data-method="crypto">
+            <div class="checkout-method__top">
+              <span class="checkout-method__name">Cryptomonnaie</span>
+              <span class="checkout-method__tag">Discret</span>
+            </div>
+            <div class="checkout-method__desc">Option de règlement discrète.</div>
+          </button>
+        </div>
+
+        <div class="checkout-summary">
+          <div class="checkout-summary__title">Récapitulatif</div>
+          <div class="checkout-summary__items" id="checkoutSummaryItems"></div>
+          <div class="checkout-summary__total">
+            <span>Total</span>
+            <span id="checkoutSummaryTotal">0.00 €</span>
+          </div>
+          <div class="checkout-actions">
+            <button class="checkout-btn secondary" id="checkoutCancelBtn">Retour au panier</button>
+            <button class="checkout-btn" id="checkoutConfirmBtn">Payer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="products">
+
+    <div class="card" data-product-id="1" data-product-name="McDonald's 500-599" data-product-price="6.25">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">5230 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 500-599</h3>
+        <div class="price-section">
+          <span class="price-current">6.25 EUR</span>
+          <span class="price-original">12.50 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="1" data-product-name="McDonald's 500-599" data-product-price="6.25">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="2" data-product-name="McDonald's 400-499" data-product-price="5.25">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">4512 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 400-499</h3>
+        <div class="price-section">
+          <span class="price-current">5.25 EUR</span>
+          <span class="price-original">10.50 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="2" data-product-name="McDonald's 400-499" data-product-price="5.25">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="3" data-product-name="McDonald's 350-399" data-product-price="5.00">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">6829 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 350-399</h3>
+        <div class="price-section">
+          <span class="price-current">5.00 EUR</span>
+          <span class="price-original">10.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="3" data-product-name="McDonald's 350-399" data-product-price="5.00">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="4" data-product-name="McDonald's 300-349" data-product-price="4.50">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">107221 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 300-349</h3>
+        <div class="price-section">
+          <span class="price-current">4.50 EUR</span>
+          <span class="price-original">9.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="4" data-product-name="McDonald's 300-349" data-product-price="4.50">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="5" data-product-name="McDonald's 250-299" data-product-price="3.75">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">29948 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 250-299</h3>
+        <div class="price-section">
+          <span class="price-current">3.75 EUR</span>
+          <span class="price-original">7.50 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="5" data-product-name="McDonald's 250-299" data-product-price="3.75">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="6" data-product-name="McDonald's 200-249" data-product-price="3.25">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">67224 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 200-249</h3>
+        <div class="price-section">
+          <span class="price-current">3.25 EUR</span>
+          <span class="price-original">6.50 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="6" data-product-name="McDonald's 200-249" data-product-price="3.25">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="7" data-product-name="McDonald's 175-199" data-product-price="3.00">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">66829 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 175-199</h3>
+        <div class="price-section">
+          <span class="price-current">3.00 EUR</span>
+          <span class="price-original">6.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="7" data-product-name="McDonald's 175-199" data-product-price="3.00">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="8" data-product-name="McDonald's 150-174" data-product-price="2.50">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">107221 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 150-174</h3>
+        <div class="price-section">
+          <span class="price-current">2.50 EUR</span>
+          <span class="price-original">5.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="8" data-product-name="McDonald's 150-174" data-product-price="2.50">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="9" data-product-name="McDonald's 125-149" data-product-price="2.00">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">173441 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 125-149</h3>
+        <div class="price-section">
+          <span class="price-current">2.00 EUR</span>
+          <span class="price-original">4.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="9" data-product-name="McDonald's 125-149" data-product-price="2.00">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="10" data-product-name="McDonald's 100-124" data-product-price="1.50">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">258515 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 100-124</h3>
+        <div class="price-section">
+          <span class="price-current">1.50 EUR</span>
+          <span class="price-original">3.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="10" data-product-name="McDonald's 100-124" data-product-price="1.50">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="11" data-product-name="McDonald's 75-99" data-product-price="1.00">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">356990 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 75-99</h3>
+        <div class="price-section">
+          <span class="price-current">1.00 EUR</span>
+          <span class="price-original">2.00 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="11" data-product-name="McDonald's 75-99" data-product-price="1.00">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-product-id="12" data-product-name="McDonald's 50-74" data-product-price="0.23">
+      <div class="card-image">
+        <div class="discount-badge">-50%</div>
+        <div class="stock-badge">8607 en stock</div>
+      </div>
+      <div class="card-content">
+        <h3>McDonald's 50-74</h3>
+        <div class="price-section">
+          <span class="price-current">0.23 EUR</span>
+          <span class="price-original">0.46 EUR</span>
+        </div>
+        <div class="fidele-text">Points de fidélité.</div>
+        <button class="card-btn add-to-cart-btn" data-product-id="12" data-product-name="McDonald's 50-74" data-product-price="0.23">
+          <span class="plus-icon">+</span>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
